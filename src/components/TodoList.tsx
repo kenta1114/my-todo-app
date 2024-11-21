@@ -5,22 +5,34 @@ import TodoItem from './TodoItem';
 interface Todo{
   id:number;
   text:string;
+  category:string;
 }
 
 const TodoList:React.FC=()=>{
   const [todos,setTodos] = useState<Todo[]>([]);
   const [searchKeyword,setSearchKeyword] = useState("");
   const [newTask, setNewTask] = useState("");
+  const [category, setCategory] = useState("");
+  const [filter,setFilter] = useState("");
 
-  const filteredTodos = todos.filter((todo)=>todo.text.toLowerCase().includes(searchKeyword.toLowerCase()));
 
   const addTask=()=>{
-    if(!newTask.trim()) return;
-    setTodos((prevTodos)=>[...prevTodos,
-      {id:prevTodos.length+1, text:newTask},
-    ]);
+    if(newTask.trim()==="") return;
+
+    const newTodo:Todo={
+      id:Date.now(),
+      text:newTask,
+      category:category,
+    };
+
+    setTodos([...todos,newTodo]);
     setNewTask("");
   };
+
+  const filteredTodos = 
+    filter === "すべて"
+      ? todos
+      : todos.filter((todo)=>todo.category===filter);
 
   return(
     <div>
@@ -47,7 +59,31 @@ const TodoList:React.FC=()=>{
               追加
             </Button>
           </Box>
+          <select
+            value={category}
+            onChange={(e)=>setCategory(e.target.value)}
+            style={{padding:"8px",marginLeft:"8px"}}
+          >
+            <option value="仕事">仕事</option>
+            <option value="買い物">買い物</option>
+            <option value="趣味">趣味</option>
+          </select>
           
+          {/*カテゴリフィルター */}
+          <div style={{ marginBottom:"20px"}}>
+            <label>カテゴリで絞り込む:</label>
+            <select
+              value={filter}
+              onChange={(e)=>setFilter(e.target.value)}
+              style={{padding:"8px"}}
+            >
+              <option value="すべて">すべて</option>
+              <option value="仕事">仕事</option>
+              <option value="買い物">買い物</option>
+              <option value="趣味">趣味</option>
+            </select>
+          </div>
+
           {/*タスクリストの表示 */}
           {filteredTodos.length>0?(
             filteredTodos.map((todo)=><TodoItem key={todo.id} todo={todo}/>)
