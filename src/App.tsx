@@ -8,6 +8,7 @@ const App:React.FC=()=>{
       <Box
         sx={{
           display:'flex',
+          flexDirection:'column',
           justifyContent:'center',
           alignitems:'center',
           height:'100vh',
