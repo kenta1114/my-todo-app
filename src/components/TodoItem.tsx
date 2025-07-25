@@ -30,7 +30,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, onDelete,onToggleDone })=>{
       >
         <Checkbox
           checked={todo.done}
-           onChange={() => onToggleDone(todo.id)}
+          onChange={() => onToggleDone(todo.id)}
           color="default"
         />
         <Checkbox color="default"/>
