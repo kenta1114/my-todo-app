@@ -1,12 +1,15 @@
 import React from 'react';
 import {Card,CardContent,Checkbox,Typography} from '@mui/material';
 
-interface TodoItemProps{
-  todo:{
-    id:number;
-    text:string;
-    onDelete: (id: number) => void;
-  };
+interface Todo {
+  id: number;
+  text: string;
+  category: string;
+}
+
+interface TodoItemProps {
+  todo: Todo;
+  onDelete: (id: number) => void;
 }
 
 const TodoItem: React.FC<TodoItemProps> = ({ todo, onDelete })=>{
