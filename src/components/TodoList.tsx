@@ -99,6 +99,10 @@ const TodoList: React.FC = () => {
           ))
         ) : (
           <p>タスクが見つかりませんでした</p>
-        )};
+        )}
+      </Box>
+    </div>
+  );
+};
 
-                  
+export default TodoList;
