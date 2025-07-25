@@ -97,7 +97,8 @@ const TodoList: React.FC = () => {
           filteredTodos.map((todo) => (
             <TodoItem key={todo.id} todo={todo} onDelete={handleDelete} />
           ))
-        ):(
+        ) : (
           <p>タスクが見つかりませんでした</p>
-        )}
+        )};
+
                   
