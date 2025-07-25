@@ -121,7 +121,7 @@ const TodoList: React.FC = () => {
         {/* タスクリストの表示 */}
         {filteredTodos.length > 0 ? (
           filteredTodos.map((todo) => (
-            <TodoItem key={todo.id} todo={todo} onDelete={handleDelete} />
+            <TodoItem key={todo.id} todo={todo} onDelete={handleDelete} onToggleDone={toggleDone} />
           ))
         ) : (
           <p>タスクが見つかりませんでした</p>
