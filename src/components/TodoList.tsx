@@ -6,6 +6,7 @@ interface Todo {
   id: number;
   text: string;
   category: string;
+  done:boolean;
 }
 
 const TodoList: React.FC = () => {
@@ -40,6 +41,21 @@ const TodoList: React.FC = () => {
       todo.text.toLowerCase().includes(searchKeyword.toLowerCase())
     );
 
+  const toggleDone=(id:number)=>{
+    setTodos(prev=>
+      prev.map(todo=>
+        todo.id === id ? {...todo, done:!todo.done}:todo
+      )
+    );
+  };
+
+  const clearCompleted = () => {
+    setTodos(prev => prev.filter(todo => !todo.done));
+  };
+
+  
+
+  
   return (
     <div>
       <Box sx={{ width: "400px", margin: "0 auto", padding: "20px" }}>
@@ -91,6 +107,16 @@ const TodoList: React.FC = () => {
             <option value="趣味">趣味</option>
           </select>
         </div>
+
+        <Button
+          variant="outlined"
+          color="secondary"
+          onClick={clearCompleted}
+          sx={{ marginTop: '10px' }}
+        >
+        完了したタスクを削除
+        </Button>
+
 
         {/* タスクリストの表示 */}
         {filteredTodos.length > 0 ? (
