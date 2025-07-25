@@ -38,6 +38,10 @@ const TodoList:React.FC=()=>{
     task.title.toLowerCase().includes(searchKeyword.toLowerCase())
   );
 
+  const handleDelete=(taskId:number)=>{
+    setTasks(tasks.filter(task => task.id !==taskId));
+  }
+
 
   return(
     <div>
@@ -95,6 +99,17 @@ const TodoList:React.FC=()=>{
           ):(
             <p>タスクが見つかりませんでした</p>
           )}
+
+        {filteredTasks.map((task)=>(
+          <div key={task.id} className="flex justify-between items-center p-2 border-b">
+            <span>{task.title}</span>
+            <button
+              className="bg-red-500 text-white px-2 py-1 rounded"
+              onClick={()=>handleDelete(task.id)}
+            >
+              削除
+            </button>
+          </div>
       </Box>
     </div>
   );
