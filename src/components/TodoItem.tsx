@@ -34,7 +34,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, onDelete,onToggleDone })=>{
           onChange={() => onToggleDone(todo.id)}
           color="default"
         />
-        <Checkbox color="default"/>
+        
         <CardContent sx={{padding:'0',flexGrow:1}}>
           <Typography variant="body1" sx={{fontFamily:'Arial',color:'#333'}}>
             {todo.text}
