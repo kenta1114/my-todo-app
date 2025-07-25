@@ -8,7 +8,7 @@ interface TodoItemProps{
   };
 }
 
-const TodoItem: React.FC<TodoItemProps> = ({ todo })=>{
+const TodoItem: React.FC<TodoItemProps> = ({ todo, onDelete })=>{
   return(
     <Card
       variant="outlined"
@@ -29,6 +29,10 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo })=>{
         </Typography>
       </CardContent>
     </Card>
+     <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px" }}>
+      <span>{todo.text}（{todo.category}）</span>
+      <button onClick={() => onDelete(todo.id)}>削除</button>
+    </div>
   );
 };
 
