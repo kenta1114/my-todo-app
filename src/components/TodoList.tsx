@@ -34,6 +34,11 @@ const TodoList:React.FC=()=>{
       ? todos
       : todos.filter((todo)=>todo.category===filter);
 
+  const filteredTasks = tasks.filter((task) =>
+    task.title.toLowerCase().includes(searchKeyword.toLowerCase())
+  );
+
+
   return(
     <div>
       <Box sx={{width: "400px", margin: "0 auto", padding: "20px"}}>
