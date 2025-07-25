@@ -23,6 +23,7 @@ const TodoList: React.FC = () => {
       id: Date.now(),
       text: newTask,
       category: category,
+      done:false,
     };
 
     setTodos([...todos, newTodo]);
