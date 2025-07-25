@@ -5,6 +5,7 @@ interface Todo {
   id: number;
   text: string;
   category: string;
+  done: boolean;
 }
 
 interface TodoItemProps {
