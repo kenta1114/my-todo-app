@@ -2,7 +2,7 @@ import React from 'react';
 import {Card,CardContent,Checkbox,Typography} from '@mui/material';
 
 interface Todo {
-  id: number;
+  id: string;
   text: string;
   category: string;
   done: boolean;
@@ -10,8 +10,8 @@ interface Todo {
 
 interface TodoItemProps {
   todo: Todo;
-  onDelete: (id: number) => void;
-  onToggleDone: (id: number) => void;
+  onDelete: (id: string) => void;
+  onToggleDone: (id: string) => void;
 }
 
 const TodoItem: React.FC<TodoItemProps> = ({ todo, onDelete,onToggleDone })=>{
