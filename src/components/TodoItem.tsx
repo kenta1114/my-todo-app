@@ -102,7 +102,6 @@ const TodoItem: React.FC<TodoItemProps> = ({
       </Card>
        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px" }}>
         <span></span>
-        <button>削除</button>
       </div>
     </>
   );
