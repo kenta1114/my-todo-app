@@ -169,19 +169,7 @@ const TodoList: React.FC = () => {
 
       {/* カテゴリと優先度選択 */}
       <Box sx={{display:'flex',gap:2,marginBottom:3}}>
-        <FormControl sx={{minWidth:120}}>
-          <InputLabel>カテゴリ</InputLabel>
-          <Select
-            value={category}
-            label="カテゴリー"
-            onChange={(e)=>setCategory(e.target.value)}
-          >
-            <MenuItem value="仕事">仕事</MenuItem>
-            <MenuItem value="買い物">買い物</MenuItem>
-            <MenuItem value="趣味">趣味</MenuItem>
-          </Select>
-        </FormControl>
-
+        
         <FormControl sx={{minWidth:120}}>
           <InputLabel>優先度</InputLabel>
           <Select
