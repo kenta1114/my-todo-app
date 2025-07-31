@@ -7,7 +7,6 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
-  Chip
 } from '@mui/material';
 import TodoItem from './TodoItem';
 
@@ -31,11 +30,8 @@ const TodoList: React.FC = () => {
   const [newTask, setNewTask] = useState("");
   const [category, setCategory] = useState("仕事");
   const [priority, setPriority]=useState<Todo['priority']>("MEDIUM");
-  const [urgent, setUrgent] = useState(false);
-  const [important, setImportant] = useState(false);
   const [filter, setFilter] = useState("すべて");
   const [priorityFilter, setPriorityFilter] = useState("すべて");
-  const [sortBy, setsortBy] = useState("priority"); 
 
   const addTask = () => {
     if (newTask.trim() === "") return;
@@ -92,15 +88,6 @@ const TodoList: React.FC = () => {
     MEDIUM: todos.filter(t => t.priority === 'MEDIUM' && !t.done).length,
     LOW: todos.filter(t => t.priority === 'LOW' && !t.done).length,
   }
-
-  //ソート機能
-  const sortTodos=(todos:Todo[])=>{
-    if(sortBy==='priority'){
-      const priorityOrder={"HIGH":1 , "MEDIUM":2 ,"LOW":3};
-      return [...todos].sort((a,b)=>priorityOrder[b.priority]-priorityOrder[a.priority]);
-    }
-    return todos;
-  };
 
 
   return (
