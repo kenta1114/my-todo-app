@@ -31,7 +31,6 @@ const TodoList: React.FC = () => {
   const [category, setCategory] = useState("仕事");
   const [priority, setPriority]=useState<Todo['priority']>("MEDIUM");
   const [filter, setFilter] = useState("すべて");
-  const [priorityFilter, setPriorityFilter] = useState("すべて");
 
   const addTask = () => {
     if (newTask.trim() === "") return;
@@ -56,9 +55,6 @@ const TodoList: React.FC = () => {
     .filter(todo =>
       filter === "すべて" ? true : todo.category === filter
     )
-    .filter(todo=>
-      priorityFilter==="すべて" ?  true: todo.priority === priorityFilter
-    )
     .filter(todo =>
       todo.text.toLowerCase().includes(searchKeyword.toLowerCase())
     );
@@ -75,13 +71,13 @@ const TodoList: React.FC = () => {
     setTodos(prev => prev.filter(todo => !todo.done));
   };
 
-  const updatePriority=(id:string,newPriority:"HIGH"| "MEDIUM" | "LOW")=>{
-    setTodos(prev=> {
-      return prev.map(todo=>
-        todo.id === id ? {...todo,priority:newPriority}:todo
-      );
-    });
-  };
+  // const updatePriority=(id:string,newPriority:"HIGH"| "MEDIUM" | "LOW")=>{
+  //   setTodos(prev=> {
+  //     return prev.map(todo=>
+  //       todo.id === id ? {...todo,priority:newPriority}:todo
+  //     );
+  //   });
+  // };
 
   const priorityStats={
     HIGH: todos.filter(t => t.priority === 'HIGH' && !t.done).length,
