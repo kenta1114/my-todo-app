@@ -13,7 +13,6 @@ import TodoItem from './TodoItem';
 interface Todo {
   id: string;
   text: string;
-  category: string;
   done:boolean;
   priority:"HIGH" | "MEDIUM" | "LOW";
 }
@@ -28,7 +27,6 @@ const TodoList: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [newTask, setNewTask] = useState("");
-  const [category, setCategory] = useState("仕事");
   const [priority, setPriority]=useState<Todo['priority']>("MEDIUM");
   const [filter, setFilter] = useState("すべて");
 
@@ -38,7 +36,6 @@ const TodoList: React.FC = () => {
     const newTodo: Todo = {
       id: Date.now().toString(),
       text: newTask,
-      category: category,
       done: false,
       priority:priority,
     };
@@ -52,9 +49,6 @@ const TodoList: React.FC = () => {
   };
 
   const filteredTodos = todos
-    .filter(todo =>
-      filter === "すべて" ? true : todo.category === filter
-    )
     .filter(todo =>
       todo.text.toLowerCase().includes(searchKeyword.toLowerCase())
     );
@@ -133,7 +127,7 @@ const TodoList: React.FC = () => {
         {/* タスクリストの表示 */}
         {filteredTodos.length > 0 ? (
           filteredTodos.map((todo) => (
-            <TodoItem key={todo.id}  todo={todo} onDelete={handleDelete} onToggleDone={toggleDone} />
+            <TodoItem key={todo.id}  onDelete={handleDelete} onToggleDone={toggleDone} />
           ))
         ) : (
           <p>タスクが見つかりませんでした</p>

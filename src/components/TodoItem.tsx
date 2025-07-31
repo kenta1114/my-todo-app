@@ -9,12 +9,11 @@ interface Todo {
 }
 
 interface TodoItemProps {
-  todo: Todo;
   onDelete: (id: string) => void;
   onToggleDone: (id: string) => void;
 }
 
-const TodoItem: React.FC<TodoItemProps> = ({ todo, onDelete,onToggleDone })=>{
+const TodoItem: React.FC<TodoItemProps> = ({  onDelete,onToggleDone })=>{
   return(
     <>
       <Card
@@ -30,20 +29,17 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, onDelete,onToggleDone })=>{
         }}  
       >
         <Checkbox
-          checked={todo.done}
-          onChange={() => onToggleDone(todo.id)}
           color="default"
         />
         
         <CardContent sx={{padding:'0',flexGrow:1}}>
           <Typography variant="body1" sx={{fontFamily:'Arial',color:'#333'}}>
-            {todo.text}
           </Typography>
         </CardContent>
       </Card>
        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px" }}>
-        <span>{todo.text}（{todo.category}）</span>
-        <button onClick={() => onDelete(todo.id)}>削除</button>
+        <span></span>
+        <button>削除</button>
       </div>
     </>
   );
