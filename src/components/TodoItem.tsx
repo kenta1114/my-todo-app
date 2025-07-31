@@ -1,13 +1,21 @@
 import React from 'react';
 import {Card,CardContent,Checkbox,Typography} from '@mui/material';
 
-
-interface TodoItemProps {
-  onDelete: (id: string) => void;
-  onToggleDone: (id: string) => void;
+interface Todo{
+  id: string;
+  text: string;
+  done: boolean;
+  priority: "HIGH" | "MEDIUM" | "LOW";
 }
 
-const TodoItem: React.FC<TodoItemProps> = ({  onDelete,onToggleDone })=>{
+interface TodoItemProps {
+  todo: Todo;
+  onDelete: (id: string) => void;
+  onToggleDone: (id: string) => void;
+  onUpdatePriority:(id:string,newPriority:"HIGH" | "MEDIUM" | "LOW") => void;
+}
+
+const TodoItem: React.FC<TodoItemProps> = ({ })=>{
   return(
     <>
       <Card

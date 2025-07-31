@@ -48,11 +48,6 @@ const TodoList: React.FC = () => {
     setTodos(todos.filter(task => task.id !== taskId));
   };
 
-  const filteredTodos = todos
-    .filter(todo =>
-      todo.text.toLowerCase().includes(searchKeyword.toLowerCase())
-    );
-
   const toggleDone=(id:string)=>{
     setTodos(prev=>
       prev.map(todo=>
@@ -61,10 +56,27 @@ const TodoList: React.FC = () => {
     );
   };
 
+  const updatePriority = (id:string, newPriority:"HIGH" | "MEDIUM" | "LOW")=>{
+    setTodos(prev=>
+      prev.map(todo=>
+        todo.id === id ?{...todo, priority:newPriority} :todo
+      )
+    )
+  }
+
   const clearCompleted = () => {
     setTodos(prev => prev.filter(todo => !todo.done));
   };
 
+  const sortAndFilterTodos = ()=>{
+    let filtered = todos
+      .filter(todo=>
+        todo.text.toLowerCase().includes(searchKeyword.toLowerCase())
+      );
+
+    const priorityOrder = {"HIGH":3, "MEDIUM":2, "LOW":1};
+    return filtered.sort((a,b)=>priorityOrder[b.priority]-priorityOrder[a.priority]);
+  }
 
   const priorityStats={
     HIGH: todos.filter(t => t.priority === 'HIGH' && !t.done).length,
@@ -72,10 +84,38 @@ const TodoList: React.FC = () => {
     LOW: todos.filter(t => t.priority === 'LOW' && !t.done).length,
   }
 
+  const filteredTodos = sortAndFilterTodos();
 
   return (
     <div>
       <Box sx={{ width: "400px", margin: "0 auto", padding: "20px" }}>
+        {/* 優先度統計 */}
+        <Box sx={{ display: 'flex', gap: 2, marginBottom: 3, justifyContent: 'center' }}>
+          {Object.entries(priorityStats).map(([key, count]) => (
+            <Box
+              key={key}
+              sx={{
+                textAlign: 'center',
+                padding: 2,
+                borderRadius: 2,
+                backgroundColor: PRIORITY_CONFIG[key as keyof typeof PRIORITY_CONFIG].bgColor,
+                minWidth: 80
+              }}
+            >
+              <Box sx={{
+                fontSize: '24px',
+                fontWeight: 'bold',
+                color: PRIORITY_CONFIG[key as keyof typeof PRIORITY_CONFIG].color
+              }}>
+                {count}
+              </Box>
+              <Box sx={{ fontSize: '12px', marginTop: 0.5 }}>
+                {PRIORITY_CONFIG[key as keyof typeof PRIORITY_CONFIG].label}優先度
+              </Box>
+            </Box>
+          ))}
+        </Box>
+
         <TextField
           fullWidth
           variant="outlined"
@@ -99,20 +139,21 @@ const TodoList: React.FC = () => {
           </Button>
         </Box>
 
-        {/* カテゴリフィルター */}
-        <div style={{ marginBottom: "20px" }}>
-          <label>カテゴリで絞り込む:</label>
-          <select
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-            style={{ padding: "8px" }}
-          >
-            <option value="すべて">すべて</option>
-            <option value="仕事">仕事</option>
-            <option value="買い物">買い物</option>
-            <option value="趣味">趣味</option>
-          </select>
-        </div>
+        {/* 優先度選択 */}
+        <Box sx={{ display: 'flex', gap: 2, marginBottom: 3 }}>
+          <FormControl sx={{ minWidth: 120 }}>
+            <InputLabel>優先度</InputLabel>
+            <Select
+              value={priority}
+              label="優先度"
+              onChange={(e) => setPriority(e.target.value as 'HIGH' | 'MEDIUM' | 'LOW')}
+            >
+              <MenuItem value="HIGH">高</MenuItem>
+              <MenuItem value="MEDIUM">中</MenuItem>
+              <MenuItem value="LOW">低</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
 
         <Button
           variant="outlined"
@@ -123,61 +164,15 @@ const TodoList: React.FC = () => {
         完了したタスクを削除
         </Button>
 
-
         {/* タスクリストの表示 */}
         {filteredTodos.length > 0 ? (
           filteredTodos.map((todo) => (
-            <TodoItem key={todo.id}  onDelete={handleDelete} onToggleDone={toggleDone} />
+            <TodoItem key={todo.id} todo={todo}  onDelete={handleDelete} onToggleDone={toggleDone} onUpdatePriority={updatePriority} />
           ))
         ) : (
           <p>タスクが見つかりませんでした</p>
         )}
-      </Box>
-
-      {/*優先度機能 */}
-      <Box sx={{display:'flex',gap:2,marginBottom:3,justifyContent:'center'}}>
-        {Object.entries(priorityStats).map(([key, count])=>(
-          <Box
-            key={key}
-            sx={{
-              textAlign:'center',
-              padding:2,
-              borderRadius:2,
-              backgroundColor:PRIORITY_CONFIG[key as keyof typeof PRIORITY_CONFIG].bgColor,
-              minWidth:80
-            }}
-          >
-          <Box sx={{
-            fontSize:'24px',
-            fontWeight:'bold',
-            color:PRIORITY_CONFIG[key as keyof typeof PRIORITY_CONFIG].color
-          }}>
-            {count}
-          </Box>
-          <Box sx={{ fontSize:'12px',marginTop:0.5}}>
-            {PRIORITY_CONFIG[key as keyof typeof PRIORITY_CONFIG].label}優先度
-          </Box>
-        </Box>
-        ))}
-      </Box>
-
-      {/* カテゴリと優先度選択 */}
-      <Box sx={{display:'flex',gap:2,marginBottom:3}}>
-        
-        <FormControl sx={{minWidth:120}}>
-          <InputLabel>優先度</InputLabel>
-          <Select
-            value={priority}
-            label="優先度"
-            onChange={(e)=>setPriority(e.target.value as'HIGH' | 'MEDIUM' | 'LOW')}
-          >
-            <MenuItem value="HIGH">高</MenuItem>
-            <MenuItem value="MEDIUM">中</MenuItem>
-            <MenuItem value="LOW">低</MenuItem>
-          </Select>
-        </FormControl>
-      </Box>
-
+      </Box>      
     </div>
   );
 };
