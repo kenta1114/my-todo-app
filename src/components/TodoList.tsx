@@ -71,13 +71,6 @@ const TodoList: React.FC = () => {
     setTodos(prev => prev.filter(todo => !todo.done));
   };
 
-  // const updatePriority=(id:string,newPriority:"HIGH"| "MEDIUM" | "LOW")=>{
-  //   setTodos(prev=> {
-  //     return prev.map(todo=>
-  //       todo.id === id ? {...todo,priority:newPriority}:todo
-  //     );
-  //   });
-  // };
 
   const priorityStats={
     HIGH: todos.filter(t => t.priority === 'HIGH' && !t.done).length,
@@ -111,17 +104,6 @@ const TodoList: React.FC = () => {
             追加
           </Button>
         </Box>
-
-        {/* カテゴリ選択 */}
-        <select
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          style={{ padding: "8px", marginLeft: "8px", marginBottom: "20px" }}
-        >
-          <option value="仕事">仕事</option>
-          <option value="買い物">買い物</option>
-          <option value="趣味">趣味</option>
-        </select>
 
         {/* カテゴリフィルター */}
         <div style={{ marginBottom: "20px" }}>
