@@ -28,7 +28,6 @@ const TodoList: React.FC = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [newTask, setNewTask] = useState("");
   const [priority, setPriority]=useState<Todo['priority']>("MEDIUM");
-  const [filter, setFilter] = useState("すべて");
 
   const addTask = () => {
     if (newTask.trim() === "") return;
