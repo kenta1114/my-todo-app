@@ -87,7 +87,8 @@ const TodoList: React.FC = () => {
 
   return (
     <div>
-      <Box sx={{ width: "400px", margin: "0 auto", padding: "20px" }}>
+      <Box sx={{ width: "500px", margin: "0 auto", padding: "20px" }}>
+
         {/* 優先度統計 */}
         <Box sx={{ display: 'flex', gap: 2, marginBottom: 3, justifyContent: 'center' }}>
           {Object.entries(priorityStats).map(([key, count]) => (
@@ -158,7 +159,7 @@ const TodoList: React.FC = () => {
           variant="outlined"
           color="secondary"
           onClick={clearCompleted}
-          sx={{ marginTop: '10px' }}
+          sx={{ marginBottom: 2 }}
         >
         完了したタスクを削除
         </Button>
