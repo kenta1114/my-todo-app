@@ -1,12 +1,6 @@
 import React from 'react';
 import {Card,CardContent,Checkbox,Typography} from '@mui/material';
 
-interface Todo {
-  id: string;
-  text: string;
-  category: string;
-  done: boolean;
-}
 
 interface TodoItemProps {
   onDelete: (id: string) => void;
