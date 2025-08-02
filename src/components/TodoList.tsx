@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import TodoItem from './TodoItem';
 import DatePicker from './DatePicker';
-import { Todo, ReminderSettings } from '../types/Todo';
+import { Todo } from '../types/Todo';
 import { useReminder } from '../hooks/useReminder';
 import { isOverdue, getDateStatus } from '../utils/dateUtils';
 
@@ -70,25 +70,18 @@ const TodoList: React.FC = () => {
     );
   };
 
-  const updateDueDate = (id: string, dueDate: Date | undefined) => {
-    setTodos(prev =>
-      prev.map(todo =>
-        todo.id === id ? { ...todo, dueDate, reminderSent: false } : todo
-      )
-    );
-  };
+  // const updateDueDate = (id: string, dueDate: Date | undefined) => {
+  //   setTodos(prev =>
+  //     prev.map(todo =>
+  //       todo.id === id ? { ...todo, dueDate, reminderSent: false } : todo
+  //     )
+  //   );
+  // };
 
   const clearCompleted = () => {
     setTodos(prev => prev.filter(todo => !todo.done));
   };
 
-  const markReminderSent = (id: string) => {
-    setTodos(prev =>
-      prev.map(todo =>
-        todo.id === id ? { ...todo, reminderSent: true } : todo
-      )
-    );
-  };
 
   const sortAndFilterTodos = () => {
     let filtered = todos
