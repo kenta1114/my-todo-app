@@ -30,7 +30,7 @@ const TodoList: React.FC = () => {
   const [priority, setPriority] = useState<Todo['priority']>("MEDIUM");
   const [newTaskDueDate, setNewTaskDueDate] = useState<Date | undefined>();
   
-  const { reminderSettings, updateReminderSettings, notificationPermission } = useReminder(todos);
+  const { reminderSettings, updateReminderSettings, notificationPermission } = useReminder({todos});
 
   const addTask = () => {
     if (newTask.trim() === "") return;
