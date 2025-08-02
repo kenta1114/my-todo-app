@@ -1,10 +1,20 @@
 export interface Todo{
-    id:number;
+    id:string;
     text:string;
-    category:string;
     done:boolean;
     priority: "LOW" | "MEDIUM" | "HIGH"; // Optional priority field
-    urgent?:boolean;
-    important?:boolean;
     createdAt: Date;
+    dueDate?:Date;
+    reminderTime?:Date;
+    isOverdue?:boolean;
+    reminderSent?:boolean;
 }
+
+export interface ReminderSettings{
+    enabled:boolean;
+    beforeMinutes:number;
+    type:"browser"| "email" | 'none';
+}
+
+export type DateStatus = 'normal'| 'warning' | 'overdue' | 'today';
+
