@@ -31,7 +31,7 @@ const TodoList: React.FC = () => {
   const [newTaskDueDate, setNewTaskDueDate] = useState<Date | undefined>();
   
   const { reminderSettings, updateReminderSettings, notificationPermission } = useReminder({todos});
-
+  
   const addTask = () => {
     if (newTask.trim() === "") return;
 
@@ -69,14 +69,6 @@ const TodoList: React.FC = () => {
       )
     );
   };
-
-  // const updateDueDate = (id: string, dueDate: Date | undefined) => {
-  //   setTodos(prev =>
-  //     prev.map(todo =>
-  //       todo.id === id ? { ...todo, dueDate, reminderSent: false } : todo
-  //     )
-  //   );
-  // };
 
   const clearCompleted = () => {
     setTodos(prev => prev.filter(todo => !todo.done));
