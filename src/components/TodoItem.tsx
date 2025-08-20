@@ -6,7 +6,10 @@ import {Card,CardContent,Checkbox,Typography,
   MenuItem, 
   FormControl,
   IconButton,
+  TextField
 } from '@mui/material';
+import EditIcon from "@mui/icons-material/Edit";
+import SaveIcon from "@mui/icons-material/Save";
 
 interface Todo{
   id: string;
@@ -48,6 +51,34 @@ const TodoItem: React.FC<TodoItemProps> = ({
 
   return(
     <>
+      {isEditing ? (
+        <TextField
+          size="small"
+          value={editText}
+          onChange={(e) => setEditText(e.target.value)}
+          onBlur={handleSave}
+          autoFocus
+        />
+      ) : (
+        <span
+          style={{
+            textDecoration: todo.done ? "line-through" : "none",
+            flexGrow: 1,
+          }}
+        >
+          {todo.text}
+        </span>
+      )}
+
+      {isEditing ? (
+        <IconButton onClick={handleSave}>
+          <SaveIcon />
+        </IconButton>
+      ) : (
+        <IconButton onClick={() => setIsEditing(true)}>
+          <EditIcon />
+        </IconButton>
+      )}
       <Card
         variant="outlined"
         sx={{
