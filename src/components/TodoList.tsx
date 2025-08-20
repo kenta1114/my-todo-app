@@ -23,8 +23,12 @@ const PRIORITY_CONFIG = {
   LOW: { label: '低', color: '#10b981', bgColor: '#f0fdf4' }
 };
 
-const TodoList: React.FC = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
+type TodoListProps = {
+  todos: Todo[];
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+};
+
+const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [newTask, setNewTask] = useState("");
   const [priority, setPriority] = useState<Todo['priority']>("MEDIUM");
@@ -123,12 +127,12 @@ const TodoList: React.FC = () => {
   const filteredTodos = sortAndFilterTodos();
 
   const updateTaskText = (id: string, newText: string) => {
-  setTodos(prev =>
-    prev.map(todo =>
-      todo.id === id ? { ...todo, text: newText } : todo
-    )
-  );
-};
+    setTodos(prev =>
+      prev.map(todo =>
+        todo.id === id ? { ...todo, text: newText } : todo
+      )
+    );
+  };
 
   return (
     <div>
