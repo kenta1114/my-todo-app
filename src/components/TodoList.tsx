@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { 
-  TextField, 
+import {
+  TextField,
   Button,
-  Box, 
+  Box,
   Select,
   MenuItem,
   FormControl,
@@ -33,9 +33,9 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
   const [newTask, setNewTask] = useState("");
   const [priority, setPriority] = useState<Todo['priority']>("MEDIUM");
   const [newTaskDueDate, setNewTaskDueDate] = useState<Date | undefined>();
-  
-  const { reminderSettings, updateReminderSettings, notificationPermission } = useReminder({todos});
-  
+
+  const { reminderSettings, updateReminderSettings, notificationPermission } = useReminder({ todos });
+
   const addTask = () => {
     if (newTask.trim() === "") return;
 
@@ -134,10 +134,18 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
     );
   };
 
+  const updateTaskDueDate = (id: string, dueDate: Date | undefined) => {
+    setTodos(prev =>
+      prev.map(todo =>
+        todo.id === id ? { ...todo, dueDate } : todo
+      )
+    );
+  };
+
   return (
     <div>
       <Box sx={{ width: "600px", margin: "0 auto", padding: "20px" }}>
-        
+
         {/* 統計表示 */}
         <Box sx={{ display: 'flex', gap: 2, marginBottom: 3, justifyContent: 'center', flexWrap: 'wrap' }}>
           {/* 優先度統計 */}
@@ -164,7 +172,7 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
               </Box>
             </Box>
           ))}
-          
+
           {/* 期限統計 */}
           <Box sx={{ textAlign: 'center', padding: 1.5, borderRadius: 2, backgroundColor: '#fef2f2', minWidth: 70 }}>
             <Box sx={{ fontSize: '20px', fontWeight: 'bold', color: '#ef4444' }}>
@@ -172,7 +180,7 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
             </Box>
             <Box sx={{ fontSize: '11px', marginTop: 0.5 }}>期限切れ</Box>
           </Box>
-          
+
           <Box sx={{ textAlign: 'center', padding: 1.5, borderRadius: 2, backgroundColor: '#fffbeb', minWidth: 70 }}>
             <Box sx={{ fontSize: '20px', fontWeight: 'bold', color: '#f59e0b' }}>
               {deadlineStats.today}
@@ -182,10 +190,10 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
         </Box>
 
         {/* リマインダー設定 */}
-        <Box sx={{ 
-          backgroundColor: '#f8fafc', 
-          padding: 2, 
-          borderRadius: 2, 
+        <Box sx={{
+          backgroundColor: '#f8fafc',
+          padding: 2,
+          borderRadius: 2,
           marginBottom: 3,
           display: 'flex',
           alignItems: 'center',
@@ -201,7 +209,7 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
             }
             label="リマインダー"
           />
-          
+
           {reminderSettings.enabled && (
             <FormControl size="small" sx={{ minWidth: 120 }}>
               <InputLabel>リマインド</InputLabel>
@@ -218,7 +226,7 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
               </Select>
             </FormControl>
           )}
-          
+
           {!notificationPermission && reminderSettings.enabled && (
             <Typography variant="caption" color="error">
               通知許可が必要です
@@ -244,7 +252,7 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
           />
-          
+
           <Box sx={{ display: 'flex', gap: 2, alignItems: 'center', flexWrap: 'wrap' }}>
             <FormControl sx={{ minWidth: 120 }}>
               <InputLabel>優先度</InputLabel>
@@ -258,13 +266,13 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
                 <MenuItem value="LOW">低</MenuItem>
               </Select>
             </FormControl>
-            
+
             <DatePicker
               dueDate={newTaskDueDate}
               onDateChange={setNewTaskDueDate}
               label="期限日時"
             />
-            
+
             <Button variant="contained" color="primary" onClick={addTask}>
               追加
             </Button>
@@ -283,19 +291,20 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
         {/* タスクリストの表示 */}
         {filteredTodos.length > 0 ? (
           filteredTodos.map((todo) => (
-            <TodoItem 
-              key={todo.id} 
-              todo={todo}  
-              onDelete={handleDelete} 
-              onToggleDone={toggleDone} 
+            <TodoItem
+              key={todo.id}
+              todo={todo}
+              onDelete={handleDelete}
+              onToggleDone={toggleDone}
               onUpdatePriority={updatePriority}
               onUpdateText={updateTaskText}
+              onUpdateDueDate={updateTaskDueDate}
             />
           ))
         ) : (
           <p>タスクが見つかりませんでした</p>
         )}
-      </Box>      
+      </Box>
     </div>
   );
 };
