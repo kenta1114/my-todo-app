@@ -122,6 +122,14 @@ const TodoList: React.FC = () => {
 
   const filteredTodos = sortAndFilterTodos();
 
+  const updateTaskText = (id: string, newText: string) => {
+  setTodos(prev =>
+    prev.map(todo =>
+      todo.id === id ? { ...todo, text: newText } : todo
+    )
+  );
+};
+
   return (
     <div>
       <Box sx={{ width: "600px", margin: "0 auto", padding: "20px" }}>
@@ -277,7 +285,7 @@ const TodoList: React.FC = () => {
               onDelete={handleDelete} 
               onToggleDone={toggleDone} 
               onUpdatePriority={updatePriority}
-              // onUpdateDueDate={updateDueDate}
+              onUpdateText={updateTaskText}
             />
           ))
         ) : (

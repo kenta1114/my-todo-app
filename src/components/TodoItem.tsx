@@ -20,6 +20,7 @@ interface TodoItemProps {
   onDelete: (id: string) => void;
   onToggleDone: (id: string) => void;
   onUpdatePriority:(id:string,newPriority:"HIGH" | "MEDIUM" | "LOW") => void;
+  onUpdateText?: (id: string, newText: string) => void;
 }
 
 const PRIORITY_CONFIG = {
@@ -32,7 +33,8 @@ const TodoItem: React.FC<TodoItemProps> = ({
   todo, 
   onDelete, 
   onToggleDone, 
-  onUpdatePriority})=>{
+  onUpdatePriority,
+})=>{
 
   const priorityConfig = PRIORITY_CONFIG[todo.priority];
 
