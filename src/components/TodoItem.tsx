@@ -1,4 +1,4 @@
-import React from 'react';
+import {useState} from 'react';
 import {Card,CardContent,Checkbox,Typography,
   Box, 
   Chip, 
@@ -20,7 +20,7 @@ interface TodoItemProps {
   onDelete: (id: string) => void;
   onToggleDone: (id: string) => void;
   onUpdatePriority:(id:string,newPriority:"HIGH" | "MEDIUM" | "LOW") => void;
-  onUpdateText?: (id: string, newText: string) => void;
+  onUpdateText: (id: string, newText: string) => void;
 }
 
 const PRIORITY_CONFIG = {
@@ -34,9 +34,17 @@ const TodoItem: React.FC<TodoItemProps> = ({
   onDelete, 
   onToggleDone, 
   onUpdatePriority,
+  onUpdateText,
 })=>{
+  const [isEditing, setIsEditing] = useState(false);
+  const [editText, setEditText] = useState(todo.text);
 
   const priorityConfig = PRIORITY_CONFIG[todo.priority];
+
+  const handleSave = () => {
+    onUpdateText(todo.id, editText);
+    setIsEditing(false);
+  };
 
   return(
     <>
