@@ -147,45 +147,51 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
       <Box sx={{ width: "600px", margin: "0 auto", padding: "20px" }}>
 
         {/* 統計表示 */}
-        <Box sx={{ display: 'flex', gap: 2, marginBottom: 3, justifyContent: 'center', flexWrap: 'wrap' }}>
-          {/* 優先度統計 */}
-          {Object.entries(priorityStats).map(([key, count]) => (
-            <Box
-              key={key}
-              sx={{
-                textAlign: 'center',
-                padding: 1.5,
-                borderRadius: 2,
-                backgroundColor: PRIORITY_CONFIG[key as keyof typeof PRIORITY_CONFIG].bgColor,
-                minWidth: 70
-              }}
-            >
-              <Box sx={{
-                fontSize: '20px',
-                fontWeight: 'bold',
-                color: PRIORITY_CONFIG[key as keyof typeof PRIORITY_CONFIG].color
-              }}>
-                {count}
-              </Box>
-              <Box sx={{ fontSize: '11px', marginTop: 0.5 }}>
-                {PRIORITY_CONFIG[key as keyof typeof PRIORITY_CONFIG].label}優先度
-              </Box>
-            </Box>
-          ))}
+        <Box sx={{ mb: 4 }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#2563eb', mb: 2 }}>
+            タスク統計
+          </Typography>
 
-          {/* 期限統計 */}
-          <Box sx={{ textAlign: 'center', padding: 1.5, borderRadius: 2, backgroundColor: '#fef2f2', minWidth: 70 }}>
-            <Box sx={{ fontSize: '20px', fontWeight: 'bold', color: '#ef4444' }}>
-              {deadlineStats.overdue}
-            </Box>
-            <Box sx={{ fontSize: '11px', marginTop: 0.5 }}>期限切れ</Box>
-          </Box>
+          <Box sx={{ display: 'flex', gap: 2, marginBottom: 3, justifyContent: 'center', flexWrap: 'wrap' }}>
+            {/* 優先度統計 */}
+            {Object.entries(priorityStats).map(([key, count]) => (
+              <Box
+                key={key}
+                sx={{
+                  textAlign: 'center',
+                  padding: 1.5,
+                  borderRadius: 2,
+                  backgroundColor: PRIORITY_CONFIG[key as keyof typeof PRIORITY_CONFIG].bgColor,
+                  minWidth: 70
+                }}
+              >
+                <Box sx={{
+                  fontSize: '20px',
+                  fontWeight: 'bold',
+                  color: PRIORITY_CONFIG[key as keyof typeof PRIORITY_CONFIG].color
+                }}>
+                  {count}
+                </Box>
+                <Box sx={{ fontSize: '11px', marginTop: 0.5 }}>
+                  {PRIORITY_CONFIG[key as keyof typeof PRIORITY_CONFIG].label}優先度
+                </Box>
+              </Box>
+            ))}
 
-          <Box sx={{ textAlign: 'center', padding: 1.5, borderRadius: 2, backgroundColor: '#fffbeb', minWidth: 70 }}>
-            <Box sx={{ fontSize: '20px', fontWeight: 'bold', color: '#f59e0b' }}>
-              {deadlineStats.today}
+            {/* 期限統計 */}
+            <Box sx={{ textAlign: 'center', padding: 1.5, borderRadius: 2, backgroundColor: '#fef2f2', minWidth: 70 }}>
+              <Box sx={{ fontSize: '20px', fontWeight: 'bold', color: '#ef4444' }}>
+                {deadlineStats.overdue}
+              </Box>
+              <Box sx={{ fontSize: '11px', marginTop: 0.5 }}>期限切れ</Box>
             </Box>
-            <Box sx={{ fontSize: '11px', marginTop: 0.5 }}>今日期限</Box>
+
+            <Box sx={{ textAlign: 'center', padding: 1.5, borderRadius: 2, backgroundColor: '#fffbeb', minWidth: 70 }}>
+              <Box sx={{ fontSize: '20px', fontWeight: 'bold', color: '#f59e0b' }}>
+                {deadlineStats.today}
+              </Box>
+              <Box sx={{ fontSize: '11px', marginTop: 0.5 }}>今日期限</Box>
+            </Box>
           </Box>
         </Box>
 
@@ -244,38 +250,44 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
         />
 
         {/* 新しいタスク追加 */}
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 2, marginBottom: 3 }}>
-          <TextField
-            fullWidth
-            variant="outlined"
-            placeholder="新しいタスクを追加"
-            value={newTask}
-            onChange={(e) => setNewTask(e.target.value)}
-          />
+        <Box sx={{ mb: 4 }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#2563eb', mb: 2 }}>
+            新しいタスクを追加
+          </Typography>
 
-          <Box sx={{ display: 'flex', gap: 2, alignItems: 'center', flexWrap: 'wrap' }}>
-            <FormControl sx={{ minWidth: 120 }}>
-              <InputLabel>優先度</InputLabel>
-              <Select
-                value={priority}
-                label="優先度"
-                onChange={(e) => setPriority(e.target.value as 'HIGH' | 'MEDIUM' | 'LOW')}
-              >
-                <MenuItem value="HIGH">高</MenuItem>
-                <MenuItem value="MEDIUM">中</MenuItem>
-                <MenuItem value="LOW">低</MenuItem>
-              </Select>
-            </FormControl>
-
-            <DatePicker
-              dueDate={newTaskDueDate}
-              onDateChange={setNewTaskDueDate}
-              label="期限日時"
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2, marginBottom: 3 }}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              placeholder="新しいタスクを追加"
+              value={newTask}
+              onChange={(e) => setNewTask(e.target.value)}
             />
 
-            <Button variant="contained" color="primary" onClick={addTask}>
-              追加
-            </Button>
+            <Box sx={{ display: 'flex', gap: 2, alignItems: 'center', flexWrap: 'wrap' }}>
+              <FormControl sx={{ minWidth: 120 }}>
+                <InputLabel>優先度</InputLabel>
+                <Select
+                  value={priority}
+                  label="優先度"
+                  onChange={(e) => setPriority(e.target.value as 'HIGH' | 'MEDIUM' | 'LOW')}
+                >
+                  <MenuItem value="HIGH">高</MenuItem>
+                  <MenuItem value="MEDIUM">中</MenuItem>
+                  <MenuItem value="LOW">低</MenuItem>
+                </Select>
+              </FormControl>
+
+              <DatePicker
+                dueDate={newTaskDueDate}
+                onDateChange={setNewTaskDueDate}
+                label="期限日時"
+              />
+
+              <Button variant="contained" color="primary" onClick={addTask}>
+                追加
+              </Button>
+            </Box>
           </Box>
         </Box>
 
@@ -289,21 +301,27 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
         </Button>
 
         {/* タスクリストの表示 */}
-        {filteredTodos.length > 0 ? (
-          filteredTodos.map((todo) => (
-            <TodoItem
-              key={todo.id}
-              todo={todo}
-              onDelete={handleDelete}
-              onToggleDone={toggleDone}
-              onUpdatePriority={updatePriority}
-              onUpdateText={updateTaskText}
-              onUpdateDueDate={updateTaskDueDate}
-            />
-          ))
-        ) : (
-          <p>タスクが見つかりませんでした</p>
-        )}
+        <Box sx={{ mt: 4 }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#2563eb', mb: 2 }}>
+            タスクリスト
+          </Typography>
+
+          {filteredTodos.length > 0 ? (
+            filteredTodos.map((todo) => (
+              <TodoItem
+                key={todo.id}
+                todo={todo}
+                onDelete={handleDelete}
+                onToggleDone={toggleDone}
+                onUpdatePriority={updatePriority}
+                onUpdateText={updateTaskText}
+                onUpdateDueDate={updateTaskDueDate}
+              />
+            ))
+          ) : (
+            <p>タスクが見つかりませんでした</p>
+          )}
+        </Box>
       </Box>
     </div>
   );

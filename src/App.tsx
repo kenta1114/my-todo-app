@@ -1,10 +1,7 @@
-
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Box } from '@mui/material';
-import TodoList from './components/TodoList';
-import EditTodo from "./components/EditTodo";
+import { Box, Paper, Typography } from '@mui/material';
 import { Todo } from "./types/Todo";
+import TodoList from './components/TodoList';
 
 
 const App: React.FC = () => {
@@ -20,34 +17,35 @@ const App: React.FC = () => {
     );
   };
 
-  return(
+  return (
     <Box
       sx={{
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #f3f4f6 0%, #e0e7ff 100%)',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center', // fixed typo: alignitems -> alignItems
-        height: '100vh',
-        backgroundColor: '#f3f4f6',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        py: 6,
       }}
     >
-      <Router>
-        <Routes>
-          <Route
-            path="/"
-            element={<TodoList todos={todos} setTodos={setTodos} />}
-          />
-          <Route
-            path="/edit/:id"
-            element={
-              <EditTodo
-                todos={todos}
-                updateTaskText={updateTaskText}
-              />
-            }
-          />
-        </Routes>
-      </Router>
+      <Paper
+        elevation={6}
+        sx={{
+          width: '100%',
+          maxWidth: 700,
+          p: { xs: 2, sm: 4 },
+          mt: 4,
+          borderRadius: 4,
+          boxShadow: '0 8px 32px rgba(60,60,120,0.12)',
+          background: '#fff',
+        }}
+      >
+        <Typography variant="h4" align="center" gutterBottom sx={{ fontWeight: 'bold', color: '#374151' }}>
+          My Todo App
+        </Typography>
+        <TodoList todos={todos} setTodos={setTodos} />
+      </Paper>
     </Box>
   );
 };
