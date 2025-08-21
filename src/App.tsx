@@ -9,14 +9,6 @@ const App: React.FC = () => {
     // ...your initial todos
   ]);
 
-  // const updateTaskText = (id: string, newText: string) => {
-  //   setTodos(prev =>
-  //     prev.map(todo =>
-  //       todo.id === id ? { ...todo, text: newText } : todo
-  //     )
-  //   );
-  // };
-
   return (
     <Box
       sx={{

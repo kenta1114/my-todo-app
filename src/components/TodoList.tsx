@@ -26,14 +26,20 @@ const PRIORITY_CONFIG = {
 type TodoListProps = {
   todos: Todo[];
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-};
+}
+
 
 const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
+  // const [searchKeyword, setSearchKeyword] = useState("");
   const [searchKeyword, setSearchKeyword] = useState("");
+  // const [newTask, setNewTask] = useState("");
   const [newTask, setNewTask] = useState("");
+  // const [priority, setPriority] = useState<Todo['priority']>("MEDIUM");
   const [priority, setPriority] = useState<Todo['priority']>("MEDIUM");
+  // const [newTaskDueDate, setNewTaskDueDate] = useState<Date | undefined>();
   const [newTaskDueDate, setNewTaskDueDate] = useState<Date | undefined>();
 
+  // const { reminderSettings, updateReminderSettings, notificationPermission } = useReminder({ todos });
   const { reminderSettings, updateReminderSettings, notificationPermission } = useReminder({ todos });
 
   const addTask = () => {
@@ -56,7 +62,7 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
 
   const handleDelete = (taskId: string) => {
     setTodos(todos.filter(task => task.id !== taskId));
-  };
+  }
 
   const toggleDone = (id: string) => {
     setTodos(prev =>
@@ -64,7 +70,8 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
         todo.id === id ? { ...todo, done: !todo.done } : todo
       )
     );
-  };
+  }
+
 
   const updatePriority = (id: string, newPriority: "HIGH" | "MEDIUM" | "LOW") => {
     setTodos(prev =>
@@ -72,12 +79,11 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
         todo.id === id ? { ...todo, priority: newPriority } : todo
       )
     );
-  };
+  }
 
   const clearCompleted = () => {
     setTodos(prev => prev.filter(todo => !todo.done));
   };
-
 
   const sortAndFilterTodos = () => {
     let filtered = todos
