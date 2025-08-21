@@ -25,7 +25,6 @@ const App: React.FC = () => {
       }}
     >
       {/* ナビゲーションバー */}
-      <Navigation />
 
 
 
@@ -50,6 +49,7 @@ const App: React.FC = () => {
           <Route path="/" element={<TodoList todos={todos} setTodos={setTodos} />} />
           <Route path="/statistics" element={<Statistics todos={todos} />} />
           <Route path="/settings" element={<Settings todos={todos} setTodos={setTodos} />} />
+          <Navigation />
         </Routes>
       </Paper>
     </Box>
