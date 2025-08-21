@@ -9,7 +9,7 @@ import {
   Chip,
 } from '@mui/material';
 import { Todo } from '../types/Todo';
-import { isOverdue, getDateStatus, getDaysUntilDue } from '../utils/dateUtils';
+import { isOverdue, getDateStatus } from '../utils/dateUtils';
 
 interface StatisticsProps {
   todos: Todo[];
@@ -44,8 +44,6 @@ const Statistics: React.FC<StatisticsProps> = ({ todos }) => {
 
   // 期限に関する統計
   const overdueCount = todos.filter(t => !t.done && t.dueDate && isOverdue(t.dueDate)).length;
-  const todayDueCount = todos.filter(t => !t.done && t.dueDate && getDateStatus(t.dueDate) === 'today').length;
-  const upcomingCount = todos.filter(t => !t.done && t.dueDate && getDateStatus(t.dueDate) === 'warning').length;
 
   // 最近の活動
   const recentCompletedTasks = todos
