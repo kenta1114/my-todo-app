@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Box, Paper, Typography } from '@mui/material';
 import { Todo } from "./types/Todo";
 import TodoList from './components/TodoList';
-import { Routes, Route } from "react-router-dom";
 
 const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([
@@ -41,10 +40,6 @@ const App: React.FC = () => {
           My Todo App
         </Typography>
         <TodoList todos={todos} setTodos={setTodos} />
-        <TodoList todos={todos} setTodos={setTodos} />
-        <Routes>
-          <Route path="/" element={<TodoList todos={todos} setTodos={setTodos} />} />
-        </Routes>
       </Paper>
     </Box>
   )
