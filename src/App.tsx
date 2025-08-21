@@ -3,7 +3,6 @@ import { Box, Paper, Typography } from '@mui/material';
 import { Todo } from "./types/Todo";
 import TodoList from './components/TodoList';
 import Navigation from './components/Navigation'; // 追加
-import Statistics from './components/Statistics'; // 追加
 import Settings from './components/Settings'; // 追加
 import { Routes, Route } from "react-router-dom";
 
@@ -47,7 +46,6 @@ const App: React.FC = () => {
         <TodoList todos={todos} setTodos={setTodos} />
         <Routes>
           <Route path="/" element={<TodoList todos={todos} setTodos={setTodos} />} />
-          <Route path="/statistics" element={<Statistics todos={todos} />} />
           <Route path="/settings" element={<Settings todos={todos} setTodos={setTodos} />} />
           <Navigation />
         </Routes>
