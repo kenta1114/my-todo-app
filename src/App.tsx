@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { Box, Paper, Typography } from '@mui/material';
 import { Todo } from "./types/Todo";
 import TodoList from './components/TodoList';
+import Navigation from './components/Navigation'; // 追加
+import Statistics from './components/Statistics'; // 追加
+import Settings from './components/Settings'; // 追加
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 const App: React.FC = () => {
@@ -21,6 +25,11 @@ const App: React.FC = () => {
         py: 6,
       }}
     >
+      {/* ナビゲーションバー */}
+      <Navigation />
+
+
+
       <Paper
         elevation={6}
         sx={{
@@ -37,9 +46,15 @@ const App: React.FC = () => {
           My Todo App
         </Typography>
         <TodoList todos={todos} setTodos={setTodos} />
+        <TodoList todos={todos} setTodos={setTodos} />
+        <Routes>
+          <Route path="/" element={<TodoList todos={todos} setTodos={setTodos} />} />
+          <Route path="/statistics" element={<Statistics todos={todos} />} />
+          <Route path="/settings" element={<Settings todos={todos} setTodos={setTodos} />} />
+        </Routes>
       </Paper>
     </Box>
-  );
+  )
 };
 
 export default App;

@@ -439,3 +439,5 @@ const Settings: React.FC<SettingsProps> = ({ todos, setTodos }) => {
     </Box>
   )
 }
+
+export default Settings;
