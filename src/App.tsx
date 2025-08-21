@@ -5,7 +5,7 @@ import TodoList from './components/TodoList';
 import Navigation from './components/Navigation'; // 追加
 import Statistics from './components/Statistics'; // 追加
 import Settings from './components/Settings'; // 追加
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([
