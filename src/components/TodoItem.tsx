@@ -51,15 +51,15 @@ const TodoItem: React.FC<TodoItemProps> = ({
   const priorityConfig = PRIORITY_CONFIG[todo.priority];
 
   const handleSave = () => {
-  if (editText.trim()) {  // 空文字チェック追加
-    onUpdateText(todo.id, editText.trim());
-    onUpdatePriority(todo.id, editPriority);
-    if (onUpdateDueDate) {
-      onUpdateDueDate(todo.id, editDueDate);
+    if (editText.trim()) {
+      onUpdateText(todo.id, editText.trim());
+      onUpdatePriority(todo.id, editPriority);
+      if (onUpdateDueDate) {
+        onUpdateDueDate(todo.id, editDueDate);
+      }
+      setIsEditing(false);
     }
-    setIsEditing(false);
-  }
-};
+  };
 
   const handleCancel = () => {
     setEditText(todo.text);
@@ -158,36 +158,20 @@ const TodoItem: React.FC<TodoItemProps> = ({
       </CardContent>
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-        <Chip
-          label={priorityConfig.label}
-          size="small"
-          sx={{
-            backgroundColor: priorityConfig.color + '20',
-            color: priorityConfig.color,
-            fontWeight: 'bold',
-            fontSize: '11px'
-          }}
-        />
-
-        <FormControl size="small" sx={{ minWidth: 60 }}>
-          <Select
-            value={todo.priority}
-            onChange={(e) => onUpdatePriority(todo.id, e.target.value as 'HIGH' | 'MEDIUM' | 'LOW')}
-            disabled={todo.done || isEditing}
+        {!isEditing && (
+          <Chip
+            label={priorityConfig.label}
+            size="small"
             sx={{
-              fontSize: '12px',
-              '& .MuiSelect-select': {
-                padding: '4px 8px'
-              }
+              backgroundColor: priorityConfig.color + '20',
+              color: priorityConfig.color,
+              fontWeight: 'bold',
+              fontSize: '11px'
             }}
-          >
-            <MenuItem value="HIGH" sx={{ fontSize: '12px' }}>高</MenuItem>
-            <MenuItem value="MEDIUM" sx={{ fontSize: '12px' }}>中</MenuItem>
-            <MenuItem value="LOW" sx={{ fontSize: '12px' }}>低</MenuItem>
-          </Select>
-        </FormControl>
-          
-          <Box sx={{ display: 'flex', gap: 0.5, flexShrink: 0 }}>
+          />
+        )}
+
+        <Box sx={{ display: 'flex', gap: 0.5, flexShrink: 0 }}>
           {isEditing ? (
             <>
               <Button onClick={handleSave} size="small" variant="contained" color="primary">
@@ -210,8 +194,10 @@ const TodoItem: React.FC<TodoItemProps> = ({
         </Box>
 
         <Button
-          variant="contained" color="primary"
-          onClick={() => onDelete(todo.id)}    
+          variant="contained"
+          color="error"
+          size="small"
+          onClick={() => onDelete(todo.id)}
         >
           削除
         </Button>
