@@ -186,11 +186,12 @@ const TodoItem: React.FC<TodoItemProps> = ({
           </>
         ) : (
           <IconButton
-            variant="contained" color="primary"
             onClick={() => setIsEditing(true)}
+            size="small"
+            sx={{ color: '#6b7280' }}
             disabled={todo.done}
           >
-            編集
+            <EditIcon />
           </IconButton>
         )}
 
