@@ -46,12 +46,14 @@ const TodoItem: React.FC<TodoItemProps> = ({
   const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState(todo.text);
   const [editDueDate, setEditDueDate] = useState<Date | undefined>(todo.dueDate);
+  const [editPriority, setEditPriority] = useState<"HIGH" | "MEDIUM" | "LOW">(todo.priority);
 
   const priorityConfig = PRIORITY_CONFIG[todo.priority];
 
   const handleSave = () => {
   if (editText.trim()) {  // 空文字チェック追加
     onUpdateText(todo.id, editText.trim());
+    onUpdatePriority(todo.id, editPriority);
     if (onUpdateDueDate) {
       onUpdateDueDate(todo.id, editDueDate);
     }
@@ -62,6 +64,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
   const handleCancel = () => {
     setEditText(todo.text);
     setEditDueDate(todo.dueDate);
+    setEditPriority(todo.priority);
     setIsEditing(false);
   };
 
@@ -114,6 +117,16 @@ const TodoItem: React.FC<TodoItemProps> = ({
                 size="small"
               />
             )}
+            <FormControl size="small" sx={{ width: 80 }}>
+              <Select
+                value={editPriority}
+                onChange={(e) => setEditPriority(e.target.value as 'HIGH' | 'MEDIUM' | 'LOW')}
+              >
+                <MenuItem value="HIGH">高</MenuItem>
+                <MenuItem value="MEDIUM">中</MenuItem>
+                <MenuItem value="LOW">低</MenuItem>
+              </Select>
+            </FormControl>
           </Box>
         ) : (
           <Box>
