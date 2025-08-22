@@ -6,7 +6,7 @@ import {
   Select,
   MenuItem,
   FormControl,
-  IconButton,
+  Button,
   TextField
 } from '@mui/material';
 import EditIcon from "@mui/icons-material/Edit";
@@ -185,22 +185,22 @@ const TodoItem: React.FC<TodoItemProps> = ({
             </IconButton>
           </>
         ) : (
-          <IconButton
+          <Button
             onClick={() => setIsEditing(true)}
             size="small"
             sx={{ color: '#6b7280' }}
             disabled={todo.done}
           >
-            <EditIcon />
-          </IconButton>
+            編集
+          </Button>
         )}
 
-        <IconButton
+        <Button
           variant="contained" color="primary"
           onClick={() => onDelete(todo.id)}    
         >
           削除
-        </IconButton>
+        </Button>
       </Box>
     </Card>
   ); 
