@@ -15,6 +15,7 @@ import TodoItem from './TodoItem';
 import DatePicker from './DatePicker';
 import { Todo } from '../types/Todo';
 import { useReminder } from '../hooks/useReminder';
+import { isOverdue } from '../utils/dateUtils';
 
 type TodoListProps = {
   todos: Todo[];
