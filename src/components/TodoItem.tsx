@@ -173,7 +173,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
             <MenuItem value="LOW" sx={{ fontSize: '12px' }}>低</MenuItem>
           </Select>
         </FormControl>
-          // 編集ボタン部分を以下に置き換え
+          
           {isEditing ? (
             <>
               <Button onClick={handleSave} size="small" variant="contained" color="primary">
