@@ -181,7 +181,6 @@ const TodoItem: React.FC<TodoItemProps> = ({
           >
             編集
           </Button>
-        )}
 
         <Button
           variant="contained" color="primary"
