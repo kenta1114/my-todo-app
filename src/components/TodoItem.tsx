@@ -52,6 +52,15 @@ const TodoItem: React.FC<TodoItemProps> = ({
     setIsEditing(false);
   };
 
+  const handleUpdateDueDate = (id: string, dueDate: Date | undefined) => {
+  setTodos(prev =>
+      prev.map(todo =>
+        todo.id === id ? { ...todo, dueDate } : todo
+      )
+    );
+  };
+
+
   return (
     <Card
       variant="outlined"
