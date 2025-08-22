@@ -53,10 +53,6 @@ const TodoItem: React.FC<TodoItemProps> = ({
   const handleSave = () => {
     if (editText.trim()) {
       onUpdateText(todo.id, editText.trim());
-      onUpdatePriority(todo.id, editPriority);
-      if (onUpdateDueDate) {
-        onUpdateDueDate(todo.id, editDueDate);
-      }
       setIsEditing(false);
     }
   };
