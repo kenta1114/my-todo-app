@@ -93,14 +93,6 @@ const DatePicker: React.FC<DatePickerProps> = ({
         />
     )}
 
-    <IconButton
-        size={size}
-        onClick={(e) => setAnchorEl(e.currentTarget)}
-        sx={{ fontSize: size === 'small' ? '1rem' : '1.2rem' }}
-      >
-        ⚡
-    </IconButton>
-
     <Menu
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
