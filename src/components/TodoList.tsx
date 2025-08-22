@@ -30,16 +30,11 @@ type TodoListProps = {
 
 
 const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
-  // const [searchKeyword, setSearchKeyword] = useState("");
   const [searchKeyword, setSearchKeyword] = useState("");
-  // const [newTask, setNewTask] = useState("");
   const [newTask, setNewTask] = useState("");
-  // const [priority, setPriority] = useState<Todo['priority']>("MEDIUM");
   const [priority, setPriority] = useState<Todo['priority']>("MEDIUM");
-  // const [newTaskDueDate, setNewTaskDueDate] = useState<Date | undefined>();
   const [newTaskDueDate, setNewTaskDueDate] = useState<Date | undefined>();
 
-  // const { reminderSettings, updateReminderSettings, notificationPermission } = useReminder({ todos });
   const { reminderSettings, updateReminderSettings, notificationPermission } = useReminder({ todos });
 
   const addTask = () => {
