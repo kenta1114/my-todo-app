@@ -81,10 +81,6 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
     );
   }
 
-  const clearCompleted = () => {
-    setTodos(prev => prev.filter(todo => !todo.done));
-  };
-
   const sortAndFilterTodos = () => {
     let filtered = todos
       .filter(todo =>
@@ -296,16 +292,7 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
             </Box>
           </Box>
         </Box>
-
-        <Button
-          variant="outlined"
-          color="secondary"
-          onClick={clearCompleted}
-          sx={{ marginBottom: 2 }}
-        >
-          完了したタスクを削除
-        </Button>
-
+        
         {/* タスクリストの表示 */}
         <Box sx={{ mt: 4 }}>
           <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#2563eb', mb: 2 }}>
