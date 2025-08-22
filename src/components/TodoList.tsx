@@ -108,19 +108,6 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
     });
   };
 
-  // 統計計算
-  const priorityStats = {
-    HIGH: todos.filter(t => t.priority === 'HIGH' && !t.done).length,
-    MEDIUM: todos.filter(t => t.priority === 'MEDIUM' && !t.done).length,
-    LOW: todos.filter(t => t.priority === 'LOW' && !t.done).length,
-  };
-
-  const deadlineStats = {
-    overdue: todos.filter(t => !t.done && t.dueDate && isOverdue(t.dueDate)).length,
-    today: todos.filter(t => !t.done && t.dueDate && getDateStatus(t.dueDate) === 'today').length,
-    upcoming: todos.filter(t => !t.done && t.dueDate && getDateStatus(t.dueDate) === 'warning').length,
-  };
-
   const filteredTodos = sortAndFilterTodos();
 
   const updateTaskText = (id: string, newText: string) => {
@@ -142,55 +129,6 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
   return (
     <div>
       <Box sx={{ width: "600px", margin: "0 auto", padding: "20px" }}>
-
-        {/* 統計表示 */}
-        <Box sx={{ mb: 4 }}>
-          <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#2563eb', mb: 2 }}>
-            タスク統計
-          </Typography>
-
-          <Box sx={{ display: 'flex', gap: 2, marginBottom: 3, justifyContent: 'center', flexWrap: 'wrap' }}>
-            {/* 優先度統計 */}
-            {Object.entries(priorityStats).map(([key, count]) => (
-              <Box
-                key={key}
-                sx={{
-                  textAlign: 'center',
-                  padding: 1.5,
-                  borderRadius: 2,
-                  backgroundColor: PRIORITY_CONFIG[key as keyof typeof PRIORITY_CONFIG].bgColor,
-                  minWidth: 70
-                }}
-              >
-                <Box sx={{
-                  fontSize: '20px',
-                  fontWeight: 'bold',
-                  color: PRIORITY_CONFIG[key as keyof typeof PRIORITY_CONFIG].color
-                }}>
-                  {count}
-                </Box>
-                <Box sx={{ fontSize: '11px', marginTop: 0.5 }}>
-                  {PRIORITY_CONFIG[key as keyof typeof PRIORITY_CONFIG].label}優先度
-                </Box>
-              </Box>
-            ))}
-
-            {/* 期限統計 */}
-            <Box sx={{ textAlign: 'center', padding: 1.5, borderRadius: 2, backgroundColor: '#fef2f2', minWidth: 70 }}>
-              <Box sx={{ fontSize: '20px', fontWeight: 'bold', color: '#ef4444' }}>
-                {deadlineStats.overdue}
-              </Box>
-              <Box sx={{ fontSize: '11px', marginTop: 0.5 }}>期限切れ</Box>
-            </Box>
-
-            <Box sx={{ textAlign: 'center', padding: 1.5, borderRadius: 2, backgroundColor: '#fffbeb', minWidth: 70 }}>
-              <Box sx={{ fontSize: '20px', fontWeight: 'bold', color: '#f59e0b' }}>
-                {deadlineStats.today}
-              </Box>
-              <Box sx={{ fontSize: '11px', marginTop: 0.5 }}>今日期限</Box>
-            </Box>
-          </Box>
-        </Box>
 
         {/* リマインダー設定 */}
         <Box sx={{
