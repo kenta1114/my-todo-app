@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {
-  Card, CardContent, Checkbox, Typography,
+  Card,  Checkbox, Typography,
   Box,
   Chip,
   Select,
@@ -93,63 +93,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
         disabled={isEditing}
       />
 
-      <CardContent sx={{ padding: '0', flexGrow: 1, marginLeft: 1 }}>
-        {isEditing ? (
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-            <TextField
-              size="small"
-              value={editText}
-              onChange={(e) => setEditText(e.target.value)}
-              onKeyDown={handleKeyPress}
-              autoFocus
-              fullWidth
-              placeholder="タスクを入力..."
-            />
-            <DatePicker
-              dueDate={editDueDate}
-              onDateChange={setEditDueDate}
-              label="期限日時"
-              size="small"
-            />
-            <FormControl size="small" fullWidth>
-              <Select
-                value={editPriority}
-                onChange={(e) => setEditPriority(e.target.value as 'HIGH' | 'MEDIUM' | 'LOW')}
-              >
-                <MenuItem value="HIGH">高</MenuItem>
-                <MenuItem value="MEDIUM">中</MenuItem>
-                <MenuItem value="LOW">低</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-        ) : (
-          <Box>
-            <Typography
-              variant="body1"
-              sx={{
-                fontFamily: 'Arial',
-                color: todo.done ? '#9ca3af' : '#333',
-                textDecoration: todo.done ? 'line-through' : 'none',
-              }}
-            >
-              {todo.text}
-            </Typography>
-            {todo.dueDate && (
-              <Typography
-                variant="caption"
-                sx={{
-                  color: getDateStatusColor(getDateStatus(todo.dueDate)),
-                  fontSize: '0.75rem',
-                  marginTop: 0.5,
-                  display: 'block'
-                }}
-              >
-                期限: {formatDate(todo.dueDate)}
-              </Typography>
-            )}
-          </Box>
-        )}
-      </CardContent>
+      
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
         {!isEditing && (
