@@ -109,15 +109,13 @@ const TodoItem: React.FC<TodoItemProps> = ({
               fullWidth
               placeholder="タスクを入力..."
             />
-            {onUpdateDueDate && (
-              <DatePicker
-                dueDate={editDueDate}
-                onDateChange={setEditDueDate}
-                label="期限日時"
-                size="small"
-              />
-            )}
-            <FormControl size="small" sx={{ width: 80 }}>
+            <DatePicker
+              dueDate={editDueDate}
+              onDateChange={setEditDueDate}
+              label="期限日時"
+              size="small"
+            />
+            <FormControl size="small" fullWidth>
               <Select
                 value={editPriority}
                 onChange={(e) => setEditPriority(e.target.value as 'HIGH' | 'MEDIUM' | 'LOW')}
