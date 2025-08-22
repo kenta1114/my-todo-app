@@ -2,9 +2,7 @@ import React from "react";
 import {
   TextField,
   Box,
-  Chip,
-  Menu,
-  MenuItem
+  Chip
 } from '@mui/material';
 
 import { formatDate, getDateStatus, getDateStatusColor} from '../utils/dateUtils';
@@ -22,24 +20,6 @@ const DatePicker: React.FC<DatePickerProps> = ({
   label = "期限日時",
   size = 'small'
 }) => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
-  const handleQuickDateSelect = (date: Date) => {
-    onDateChange(date);
-    setAnchorEl(null);
-  };
-
-  const getQuickDateOptions = () => {
-    const now = new Date();
-    const options = [
-      { label: '今日', date: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59) },
-      { label: '明日', date: new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 23, 59) },
-      { label: '今週末', date: new Date(now.getFullYear(), now.getMonth(), now.getDate() + (6 - now.getDay()), 23, 59) },
-      { label: '来週', date: new Date(now.getFullYear(), now.getMonth(), now.getDate() + 7, 23, 59) },
-    ];
-    return options;
-  };
-
   const formatDateTimeLocal = (date: Date): string => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -91,24 +71,8 @@ const DatePicker: React.FC<DatePickerProps> = ({
           onDelete={() => onDateChange(undefined)}
         />
     )}
-
-    <Menu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={() => setAnchorEl(null)}
-      >
-        {getQuickDateOptions().map((option, index) => (
-          <MenuItem
-            key={index}
-            onClick={() => handleQuickDateSelect(option.date)}
-          >
-            {option.label}
-          </MenuItem>
-        ))}
-    </Menu>
   </Box>
   )
 };
 
 export default DatePicker;
-
