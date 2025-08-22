@@ -9,9 +9,6 @@ import {
   Button,
   TextField
 } from '@mui/material';
-import EditIcon from "@mui/icons-material/Edit";
-import SaveIcon from "@mui/icons-material/Save";
-import CancelIcon from "@mui/icons-material/Cancel";
 import { formatDate, getDateStatus, getDateStatusColor } from '../utils/dateUtils';
 import DatePicker from './DatePicker';
 
@@ -175,16 +172,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
           </Select>
         </FormControl>
 
-        {isEditing ? (
-          <>
-            <IconButton onClick={handleSave} size="small" sx={{ color: '#10b981' }}>
-              <SaveIcon />
-            </IconButton>
-            <IconButton onClick={handleCancel} size="small" sx={{ color: '#ef4444' }}>
-              <CancelIcon />
-            </IconButton>
-          </>
-        ) : (
+       
           <Button
             onClick={() => setIsEditing(true)}
             size="small"
