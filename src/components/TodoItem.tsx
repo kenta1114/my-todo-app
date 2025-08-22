@@ -174,25 +174,27 @@ const TodoItem: React.FC<TodoItemProps> = ({
           </Select>
         </FormControl>
           
+          <Box sx={{ display: 'flex', gap: 0.5, flexShrink: 0 }}>
           {isEditing ? (
             <>
               <Button onClick={handleSave} size="small" variant="contained" color="primary">
                 保存
               </Button>
-              <Button onClick={handleCancel} size="small" variant="outlined" color="secondary">
-                キャンセル
+              <Button onClick={handleCancel} size="small" variant="outlined">
+                取消
               </Button>
             </>
           ) : (
-              <Button
-                onClick={() => setIsEditing(true)}
-                size="small"
-                variant="outlined"
-                disabled={todo.done}
-              >
+            <Button
+              onClick={() => setIsEditing(true)}
+              size="small"
+              variant="outlined"
+              disabled={todo.done}
+            >
               編集
-              </Button>
+            </Button>
           )}
+        </Box>
 
         <Button
           variant="contained" color="primary"
