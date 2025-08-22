@@ -1,16 +1,4 @@
 import { useState } from 'react';
-import {
-  Card,  Checkbox, Typography,
-  Box,
-  Chip,
-  Select,
-  MenuItem,
-  FormControl,
-  Button,
-  TextField
-} from '@mui/material';
-import { formatDate, getDateStatus, getDateStatusColor } from '../utils/dateUtils';
-import DatePicker from './DatePicker';
 
 interface Todo {
   id: string;
@@ -45,8 +33,6 @@ const TodoItem: React.FC<TodoItemProps> = ({
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState(todo.text);
-  const [editDueDate, setEditDueDate] = useState<Date | undefined>(todo.dueDate);
-  const [editPriority, setEditPriority] = useState<"HIGH" | "MEDIUM" | "LOW">(todo.priority);
 
   const priorityConfig = PRIORITY_CONFIG[todo.priority];
 
@@ -62,14 +48,6 @@ const TodoItem: React.FC<TodoItemProps> = ({
     setEditDueDate(todo.dueDate);
     setEditPriority(todo.priority);
     setIsEditing(false);
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      handleSave();
-    } else if (e.key === 'Escape') {
-      handleCancel();
-    }
   };
 
   return (
