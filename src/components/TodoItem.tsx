@@ -200,7 +200,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
           size="small"
           sx={{ color: '#ef4444' }}
         >
-          🗑️
+          削除
         </IconButton>
       </Box>
     </Card>
