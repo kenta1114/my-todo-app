@@ -235,7 +235,7 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
                 onToggleDone={toggleDone}
                 onUpdatePriority={updatePriority}
                 onUpdateText={updateTaskText}
-                onUpdateDueDate={updateTaskDueDate}
+                onUpdateDueDate={updateTaskDueDate, onUpdateDueDate}
               />
             ))
           ) : (
