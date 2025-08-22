@@ -15,13 +15,6 @@ import TodoItem from './TodoItem';
 import DatePicker from './DatePicker';
 import { Todo } from '../types/Todo';
 import { useReminder } from '../hooks/useReminder';
-import { isOverdue, getDateStatus } from '../utils/dateUtils';
-
-const PRIORITY_CONFIG = {
-  HIGH: { label: '高', color: '#ef4444', bgColor: '#fef2f2' },
-  MEDIUM: { label: '中', color: '#f59e0b', bgColor: '#fffbeb' },
-  LOW: { label: '低', color: '#10b981', bgColor: '#f0fdf4' }
-};
 
 type TodoListProps = {
   todos: Todo[];
