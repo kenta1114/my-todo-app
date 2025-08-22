@@ -50,12 +50,14 @@ const TodoItem: React.FC<TodoItemProps> = ({
   const priorityConfig = PRIORITY_CONFIG[todo.priority];
 
   const handleSave = () => {
-    onUpdateText(todo.id, editText);
+  if (editText.trim()) {  // 空文字チェック追加
+    onUpdateText(todo.id, editText.trim());
     if (onUpdateDueDate) {
       onUpdateDueDate(todo.id, editDueDate);
     }
     setIsEditing(false);
-  };
+  }
+};
 
   const handleCancel = () => {
     setEditText(todo.text);
@@ -171,16 +173,26 @@ const TodoItem: React.FC<TodoItemProps> = ({
             <MenuItem value="LOW" sx={{ fontSize: '12px' }}>低</MenuItem>
           </Select>
         </FormControl>
-
-       
-          <Button
-            onClick={() => setIsEditing(true)}
-            size="small"
-            sx={{ color: '#6b7280' }}
-            disabled={todo.done}
-          >
-            編集
-          </Button>
+          // 編集ボタン部分を以下に置き換え
+          {isEditing ? (
+            <>
+              <Button onClick={handleSave} size="small" variant="contained" color="primary">
+                保存
+              </Button>
+              <Button onClick={handleCancel} size="small" variant="outlined" color="secondary">
+                キャンセル
+              </Button>
+            </>
+          ) : (
+              <Button
+                onClick={() => setIsEditing(true)}
+                size="small"
+                variant="outlined"
+                disabled={todo.done}
+              >
+              編集
+              </Button>
+          )}
 
         <Button
           variant="contained" color="primary"
