@@ -175,8 +175,8 @@ const TodoItem: React.FC<TodoItemProps> = ({
               <Button onClick={handleSave} size="small" variant="contained" color="primary">
                 保存
               </Button>
-              <Button onClick={handleCancel} size="small" variant="outlined">
-                取消
+              <Button onClick={handleCancel} size="small" variant="outlined" color="secondary">
+                キャンセル
               </Button>
             </>
           ) : (
