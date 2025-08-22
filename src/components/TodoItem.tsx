@@ -186,19 +186,16 @@ const TodoItem: React.FC<TodoItemProps> = ({
           </>
         ) : (
           <IconButton
+            variant="contained" color="primary"
             onClick={() => setIsEditing(true)}
-            size="small"
-            sx={{ color: '#6b7280' }}
-            disabled={todo.done}
           >
-            <EditIcon />
+            編集
           </IconButton>
         )}
 
         <IconButton
-          onClick={() => onDelete(todo.id)}
-          size="small"
-          sx={{ color: '#ef4444' }}
+          variant="contained" color="primary"
+          onClick={() => onDelete(todo.id)}    
         >
           削除
         </IconButton>
