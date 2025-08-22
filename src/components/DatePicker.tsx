@@ -2,7 +2,6 @@ import React from "react";
 import {
   TextField,
   Box,
-  IconButton,
   Chip,
   Menu,
   MenuItem
