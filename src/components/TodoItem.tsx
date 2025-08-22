@@ -35,7 +35,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState(todo.text);
-  const [editDueDate, setEditDueDate]=useState();
+  const [editDueDate, setEditDueDate]=useState<Date | undefined>(undefined);
 
   const priorityConfig = PRIORITY_CONFIG[todo.priority];
 
