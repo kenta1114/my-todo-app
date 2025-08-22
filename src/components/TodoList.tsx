@@ -262,7 +262,7 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
             />
 
             <Box sx={{ display: 'flex', gap: 2, alignItems: 'center', flexWrap: 'wrap' }}>
-              <FormControl sx={{ minWidth: 120 }}>
+              <FormControl>
                 <InputLabel>優先度</InputLabel>
                 <Select
                   value={priority}
