@@ -115,6 +115,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
                 onDateChange={setEditDueDate}
                 label="期限日時"
                 size="small"
+                showClearButton={false}
               />
             )}
             <FormControl size="small" sx={{ width: 80 }}>
