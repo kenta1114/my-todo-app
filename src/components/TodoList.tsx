@@ -22,7 +22,6 @@ type TodoListProps = {
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
 
-
 const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [newTask, setNewTask] = useState("");
