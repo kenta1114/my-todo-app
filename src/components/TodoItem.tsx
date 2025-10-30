@@ -35,7 +35,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState(todo.text);
-  const [editDueDate, setEditDueDate]=useState<Date | undefined>(undefined);
+  // const [editDueDate, setEditDueDate]=useState<Date | undefined>(undefined);
 
   const priorityConfig = PRIORITY_CONFIG[todo.priority];
 
@@ -48,17 +48,17 @@ const TodoItem: React.FC<TodoItemProps> = ({
 
   const handleCancel = () => {
     setEditText(todo.text);
-    setEditDueDate(todo.dueDate);
+    // setEditDueDate(todo.dueDate);
     setIsEditing(false);
   };
 
-  const handleUpdateDueDate = (id: string, dueDate: Date | undefined) => {
-  setTodos(prev =>
-      prev.map(todo =>
-        todo.id === id ? { ...todo, dueDate } : todo
-      )
-    );
-  };
+  // const handleUpdateDueDate = (id: string, dueDate: Date | undefined) => {
+  // setTodos(prev =>
+  //     prev.map(todo =>
+  //       todo.id === id ? { ...todo, dueDate } : todo
+  //     )
+  //   );
+  // };
 
 
   return (
@@ -81,9 +81,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
         color="default"
         disabled={isEditing}
       />
-
       
-
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
         {!isEditing && (
           <Chip
