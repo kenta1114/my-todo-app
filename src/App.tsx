@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Box, Paper, Typography } from '@mui/material';
 import { Todo } from "./types/Todo";
 import TodoList from './components/TodoList';
-import { todoApi } from './api/todoApi';
+import { todoApi } from './api';
 
 const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
