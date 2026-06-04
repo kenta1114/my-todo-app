@@ -4,7 +4,7 @@ import { Todo } from "./types/Todo";
 import TodoList from './components/TodoList';
 
 const App: React.FC = () => {
-  const [todos, setTodos] = useState<Todo[]>(()=>[
+  const [todos, setTodos] = useState<Todo[]>(()=>{
     const saved = localStorage.getItem('todos');
     if(!saved) return [];
     return JSON.parse(saved).map((todo:any)=>({
@@ -15,7 +15,7 @@ const App: React.FC = () => {
   ]);
 
   useEffect(()=>{
-    localstorage.setItem('todos', JSON.stringify(todos));
+    localStorage.setItem('todos', JSON.stringify(todos));
   },[todos]);
   
   return (
