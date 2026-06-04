@@ -121,53 +121,6 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
 
   return (
     <div>
-      <Box sx={{ width: "600px", margin: "0 auto", padding: "20px" }}>
-
-        {/* リマインダー設定 */}
-        <Box sx={{
-          backgroundColor: '#f8fafc',
-          padding: 2,
-          borderRadius: 2,
-          marginBottom: 3,
-          display: 'flex',
-          alignItems: 'center',
-          gap: 2,
-          flexWrap: 'wrap'
-        }}>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={reminderSettings.enabled}
-                onChange={(e) => updateReminderSettings({ enabled: e.target.checked })}
-              />
-            }
-            label="リマインダー"
-          />
-
-          {reminderSettings.enabled && (
-            <FormControl size="small" sx={{ minWidth: 120 }}>
-              <InputLabel>リマインド</InputLabel>
-              <Select
-                value={reminderSettings.beforeMinutes}
-                label="リマインド"
-                onChange={(e) => updateReminderSettings({ beforeMinutes: Number(e.target.value) })}
-              >
-                <MenuItem value={5}>5分前</MenuItem>
-                <MenuItem value={15}>15分前</MenuItem>
-                <MenuItem value={30}>30分前</MenuItem>
-                <MenuItem value={60}>1時間前</MenuItem>
-                <MenuItem value={1440}>1日前</MenuItem>
-              </Select>
-            </FormControl>
-          )}
-
-          {!notificationPermission && reminderSettings.enabled && (
-            <Typography variant="caption" color="error">
-              通知許可が必要です
-            </Typography>
-          )}
-        </Box>
-
         <TextField
           fullWidth
           variant="outlined"
