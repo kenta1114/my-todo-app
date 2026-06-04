@@ -7,8 +7,6 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
-  Switch,
-  FormControlLabel,
   Typography
 } from '@mui/material';
 import TodoItem from './TodoItem';
