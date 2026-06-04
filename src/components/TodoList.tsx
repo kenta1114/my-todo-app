@@ -123,10 +123,6 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
 
         {/* 新しいタスク追加 */}
         <Box sx={{ mb: 4 }}>
-          {/* <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#2563eb', mb: 2 }}>
-            新しいタスクを追加
-          </Typography> */}
-
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2, marginBottom: 3 }}>
             <TextField
               fullWidth
@@ -165,10 +161,6 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
         
         {/* タスクリストの表示 */}
         <Box sx={{ mt: 4 }}>
-          <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#2563eb', mb: 2 }}>
-            タスクリスト
-          </Typography>
-
           {filteredTodos.length > 0 ? (
             filteredTodos.map((todo) => (
               <TodoItem
