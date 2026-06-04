@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Paper, Typography } from '@mui/material';
 import { Todo } from "./types/Todo";
 import TodoList from './components/TodoList';
 
 const App: React.FC = () => {
-  const [todos, setTodos] = useState<Todo[]>([
-    // ...your initial todos
+  const [todos, setTodos] = useState<Todo[]>(()=>[
+    const saved = localStorage.getItem('todos');
+    if(!saved) return [];
+    return JSON.parse(saved).map((todo:any)=>({
+      ...todo,
+      dueDate:todo.dueDate ? new Date(todo.dueDate):undefined,
+      createdAt:new Date(todo.createdAt),
+    }));
   ]);
 
+  useEffect(()=>{
+    localstorage.setItem('todos', JSON.stringify(todos));
+  },[todos]);
+  
   return (
     <Box
       sx={{
