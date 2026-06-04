@@ -14,8 +14,7 @@ import {
 import TodoItem from './TodoItem';
 import DatePicker from './DatePicker';
 import { Todo } from '../types/Todo';
-import { useReminder } from '../hooks/useReminder';
-import { isOverdue } from '../utils/dateUtils';
+
 
 type TodoListProps = {
   todos: Todo[];
@@ -28,7 +27,6 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
   const [priority, setPriority] = useState<Todo['priority']>("MEDIUM");
   const [newTaskDueDate, setNewTaskDueDate] = useState<Date | undefined>();
 
-  const { reminderSettings, updateReminderSettings, notificationPermission } = useReminder({ todos });
 
   const addTask = () => {
     if (newTask.trim() === "") return;
@@ -40,7 +38,6 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
       priority: priority,
       createdAt: new Date(),
       dueDate: newTaskDueDate,
-      reminderSent: false
     };
 
     setTodos([...todos, newTodo]);
@@ -77,14 +74,7 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
 
     // 期限切れ > 優先度 > 期限日 の順でソート
     return filtered.sort((a, b) => {
-      // 期限切れのタスクを最優先
-      if (a.dueDate && b.dueDate) {
-        const aOverdue = isOverdue(a.dueDate);
-        const bOverdue = isOverdue(b.dueDate);
-        if (aOverdue && !bOverdue) return -1;
-        if (!aOverdue && bOverdue) return 1;
-      }
-
+      
       // 優先度でソート
       const priorityOrder = { "HIGH": 3, "MEDIUM": 2, "LOW": 1 };
       const priorityDiff = priorityOrder[b.priority] - priorityOrder[a.priority];
