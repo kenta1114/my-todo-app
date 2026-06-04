@@ -2,21 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Box, Paper, Typography } from '@mui/material';
 import { Todo } from "./types/Todo";
 import TodoList from './components/TodoList';
+import { todoApi } from './api/todoApi';
 
 const App: React.FC = () => {
-  const [todos, setTodos] = useState<Todo[]>(()=>{
-    const saved = localStorage.getItem('todos');
-    if(!saved) return [];
-    return JSON.parse(saved).map((todo:any)=>({
-      ...todo,
-      dueDate:todo.dueDate ? new Date(todo.dueDate):undefined,
-      createdAt:new Date(todo.createdAt),
-    }));
-  });
+  const [todos, setTodos] = useState<Todo[]>([]);
 
   useEffect(()=>{
-    localStorage.setItem('todos', JSON.stringify(todos));
-  },[todos]);
+    todoApi.getAll().then(setTodos);
+  },[]);
   
   return (
     <Box

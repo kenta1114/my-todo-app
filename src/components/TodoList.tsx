@@ -26,7 +26,7 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
   const [newTaskDueDate, setNewTaskDueDate] = useState<Date | undefined>();
 
 
-  const addTask = () => {
+  const addTask = async() => {
     if (newTask.trim() === "") return;
 
     const newTodo: Todo = {
@@ -38,20 +38,23 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
       dueDate: newTaskDueDate,
     };
 
-    setTodos([...todos, newTodo]);
+    await todoApi.create(newTodo);
+    setTodos(prev=> [...prev, newTodo]);
     setNewTask("");
     setNewTaskDueDate(undefined);
   };
 
-  const handleDelete = (taskId: string) => {
-    setTodos(todos.filter(task => task.id !== taskId));
+  const handleDelete = async(taskId: string) => {
+    await todoApi.delete(taskId)
+    setTodos(prev => prev.filter(todo => todo.id !== taskId));
   }
 
-  const toggleDone = (id: string) => {
+  const toggleDone = async(id: string) => {
+    const todo = todos.find(t => t.id === id);
+    if(!todo) return;
+    await todoApi.update(id,{...todo, done:!todo.done});
     setTodos(prev =>
-      prev.map(todo =>
-        todo.id === id ? { ...todo, done: !todo.done } : todo
-      )
+      prev.map(t => t.id === id ? { ...t, done: !t.done } : t)
     );
   }
 
@@ -120,9 +123,9 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
 
         {/* 新しいタスク追加 */}
         <Box sx={{ mb: 4 }}>
-          <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#2563eb', mb: 2 }}>
+          {/* <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#2563eb', mb: 2 }}>
             新しいタスクを追加
-          </Typography>
+          </Typography> */}
 
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2, marginBottom: 3 }}>
             <TextField
@@ -182,7 +185,6 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
             <p>タスクが見つかりませんでした</p>
           )}
         </Box>
-      {/* </Box> */}
     </div>
   );
 };
