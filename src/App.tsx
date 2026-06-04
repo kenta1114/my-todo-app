@@ -12,7 +12,7 @@ const App: React.FC = () => {
       dueDate:todo.dueDate ? new Date(todo.dueDate):undefined,
       createdAt:new Date(todo.createdAt),
     }));
-  ]);
+  });
 
   useEffect(()=>{
     localStorage.setItem('todos', JSON.stringify(todos));
