@@ -184,7 +184,7 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
             <p>タスクが見つかりませんでした</p>
           )}
         </Box>
-      </Box>
+      {/* </Box> */}
     </div>
   );
 };
