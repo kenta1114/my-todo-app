@@ -1,12 +1,13 @@
-import { useState } from 'react';
-import { Card, Checkbox, Button, Chip, Box, TextField } from '@mui/material';
-
+import { useState } from "react";
+import { Card, Checkbox, Button, Chip, Box, TextField } from "@mui/material";
+import { formatDate } from "../utils/dateUtils";
 
 interface Todo {
   id: string;
   text: string;
   done: boolean;
   priority: "HIGH" | "MEDIUM" | "LOW";
+  createdAt: Date;
   dueDate?: Date;
 }
 
@@ -14,15 +15,18 @@ interface TodoItemProps {
   todo: Todo;
   onDelete: (id: string) => void;
   onToggleDone: (id: string) => void;
-  onUpdatePriority: (id: string, newPriority: "HIGH" | "MEDIUM" | "LOW") => void;
+  onUpdatePriority: (
+    id: string,
+    newPriority: "HIGH" | "MEDIUM" | "LOW",
+  ) => void;
   onUpdateText: (id: string, newText: string) => void;
   onUpdateDueDate?: (id: string, dueDate: Date | undefined) => void;
 }
 
 const PRIORITY_CONFIG = {
-  HIGH: { label: '高', color: '#ef4444', bgColor: '#fef2f2' },
-  MEDIUM: { label: '中', color: '#f59e0b', bgColor: '#fffbeb' },
-  LOW: { label: '低', color: '#10b981', bgColor: '#f0fdf4' }
+  HIGH: { label: "高", color: "#ef4444", bgColor: "#fef2f2" },
+  MEDIUM: { label: "中", color: "#f59e0b", bgColor: "#fffbeb" },
+  LOW: { label: "低", color: "#10b981", bgColor: "#f0fdf4" },
 };
 
 const TodoItem: React.FC<TodoItemProps> = ({
@@ -54,15 +58,15 @@ const TodoItem: React.FC<TodoItemProps> = ({
     <Card
       variant="outlined"
       sx={{
-        display: 'flex',
-        alignItems: 'center',
-        padding: '12px',
-        borderRadius: '8px',
-        boxShadow: 'none',
-        marginBottom: '8px',
-        borderColor: '#e0e0e0',
-        backgroundColor: todo.done ? '#f9fafb' : 'white',
-        gap: 2
+        display: "flex",
+        alignItems: "center",
+        padding: "12px",
+        borderRadius: "8px",
+        boxShadow: "none",
+        marginBottom: "8px",
+        borderColor: "#e0e0e0",
+        backgroundColor: todo.done ? "#f9fafb" : "white",
+        gap: 2,
       }}
     >
       {/* チェックボックス */}
@@ -79,11 +83,11 @@ const TodoItem: React.FC<TodoItemProps> = ({
           label={priorityConfig.label}
           size="small"
           sx={{
-            backgroundColor: priorityConfig.color + '20',
+            backgroundColor: priorityConfig.color + "20",
             color: priorityConfig.color,
-            fontWeight: 'bold',
-            fontSize: '11px',
-            flexShrink: 0
+            fontWeight: "bold",
+            fontSize: "11px",
+            flexShrink: 0,
           }}
         />
       )}
@@ -91,20 +95,25 @@ const TodoItem: React.FC<TodoItemProps> = ({
       {/* タスクテキスト or 編集フィールド */}
       <Box sx={{ flexGrow: 1, minWidth: 0 }}>
         {isEditing ? (
-          <TextField
-            fullWidth
-            size="small"
-            value={editText}
-            onChange={(e) => setEditText(e.target.value)}
-            autoFocus
-          />
+          <>
+            <Box sx={{ fontSize: "12px", color: "#6b7280", mb: 0.5 }}>
+              作成日: {formatDate(todo.createdAt)}
+            </Box>
+            <TextField
+              fullWidth
+              size="small"
+              value={editText}
+              onChange={(e) => setEditText(e.target.value)}
+              autoFocus
+            />
+          </>
         ) : (
           <Box
             sx={{
-              textDecoration: todo.done ? 'line-through' : 'none',
-              color: todo.done ? '#9ca3af' : '#1f2937',
-              fontSize: '14px',
-              wordBreak: 'break-word'
+              textDecoration: todo.done ? "line-through" : "none",
+              color: todo.done ? "#9ca3af" : "#1f2937",
+              fontSize: "14px",
+              wordBreak: "break-word",
             }}
           >
             {todo.text}
@@ -113,13 +122,23 @@ const TodoItem: React.FC<TodoItemProps> = ({
       </Box>
 
       {/* ボタン群 */}
-      <Box sx={{ display: 'flex', gap: 1, flexShrink: 0 }}>
+      <Box sx={{ display: "flex", gap: 1, flexShrink: 0 }}>
         {isEditing ? (
           <>
-            <Button onClick={handleSave} size="small" variant="contained" color="primary">
+            <Button
+              onClick={handleSave}
+              size="small"
+              variant="contained"
+              color="primary"
+            >
               保存
             </Button>
-            <Button onClick={handleCancel} size="small" variant="outlined" color="secondary">
+            <Button
+              onClick={handleCancel}
+              size="small"
+              variant="contained"
+              color="primary"
+            >
               キャンセル
             </Button>
           </>
@@ -144,7 +163,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
         </Button>
       </Box>
     </Card>
-  ); 
+  );
 };
 
 export default TodoItem;

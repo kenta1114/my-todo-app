@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Todo } from "../types/Todo";
+import { formatDate } from "../utils/dateUtils";
 
 type EditTodoProps = {
   todos: Todo[];
@@ -26,6 +27,7 @@ const EditTodo: React.FC<EditTodoProps> = ({ todos, updateTaskText }) => {
   return (
     <div>
       <h2>タスクを編集</h2>
+      <p>作成日: {formatDate(todo.createdAt)}</p>
       <input value={text} onChange={(e) => setText(e.target.value)} />
       <button onClick={handleSave}>保存</button>
     </div>

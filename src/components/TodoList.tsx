@@ -11,6 +11,7 @@ import {
 import TodoItem from './TodoItem';
 import DatePicker from './DatePicker';
 import { Todo } from '../types/Todo';
+import { todoApi } from '../api';
 
 
 
@@ -38,10 +39,14 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
       dueDate: newTaskDueDate,
     };
 
-    await todoApi.create(newTodo);
-    setTodos(prev=> [...prev, newTodo]);
-    setNewTask("");
-    setNewTaskDueDate(undefined);
+    try{
+      const created = await todoApi.create(newTodo);
+      setTodos(prev => [...prev, created]);
+      setNewTask("");
+      setNewTaskDueDate(undefined);
+    }catch(err){
+      console.error('failed to create todo',err);
+    }
   };
 
   const handleDelete = async(taskId: string) => {
@@ -133,7 +138,7 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
             />
 
             <Box sx={{ display: 'flex', gap: 2, alignItems: 'center', flexWrap: 'wrap' }}>
-              <FormControl>
+              <FormControl size="small" sx={{ minWidth: 120 }}>
                 <InputLabel>優先度</InputLabel>
                 <Select
                   value={priority}

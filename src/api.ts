@@ -1,4 +1,10 @@
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = '';
+
+const normalizeTodo = (todo:any)=>({
+  ...todo,
+  dueDate:todo.dueDate ? new Date(todo.dueDate):undefined,
+  createdAt:new Date(todo.createdAt),
+});
 
 export const todoApi = {
   // 全件取得
@@ -6,11 +12,7 @@ export const todoApi = {
     const res = await fetch(`${BASE_URL}/todos`);
     const todos = await res.json();
     // dateの文字列をDateオブジェクトに変換
-    return todos.map((todo:any)=>({
-      ...todo,
-      dueDate:todo.dueDate ? new Date(todo.dueDate):undefined,
-      createdAt:new Date(todo.createdAt),
-    }));
+    return todos.map((todo:any)=>normalizeTodo(todo));
   },
 
   // 新規追加
@@ -20,7 +22,7 @@ export const todoApi = {
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify(todo),
     });
-    return res.json(); 
+    return normalizeTodo(await res.json()); 
   },
 
   update:async(id:string, data:any)=>{
@@ -29,7 +31,7 @@ export const todoApi = {
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify(data),
     });
-    return res.json(); 
+    return normalizeTodo(await res.json()); 
   },
 
   delete:async(id:string)=>{
