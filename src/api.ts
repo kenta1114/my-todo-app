@@ -1,4 +1,4 @@
-const BASE_URL = '';
+const BASE_URL = 'https://my-todo-app-pa82.onrender.com';
 
 const normalizeTodo = (todo:any)=>({
   ...todo,
